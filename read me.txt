@@ -1,0 +1,2 @@
+Please dobbelt click or dos run the windows executeable program "TriangleChallenge" in this Folder.
+
