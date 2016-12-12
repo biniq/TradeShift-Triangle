@@ -13,11 +13,11 @@
 enum enTriangleType 
 {
 		ecTriangleTypeERROR_Input
-	, ecTriangleTypeERROR_Impossible
-	, ecTriangleTypeValid
+	,	ecTriangleTypeERROR_Impossible
+	,	ecTriangleTypeValid
 	,	ecTriangleTypeEquilateral
-	, ecTriangleTypeIsosceles 
-	, ecTriangleTypeScalene
+	,	ecTriangleTypeIsosceles 
+	,	ecTriangleTypeScalene
 };
 
 // Triangle type names
@@ -34,7 +34,7 @@ enTriangleType fnGetTriangleType( long nSideA, long nSideB, long nSideC )
 	// Check for errors in input arguements
 	if(nSideA <= 0 || nSideB <= 0 || nSideC <= 0 )
 	{
-		// one of the sides is zero or less than zero return error
+		// One of the sides is zero or less than zero return error
 		return( ecTriangleTypeERROR_Input );
 	}
 
@@ -44,24 +44,11 @@ enTriangleType fnGetTriangleType( long nSideA, long nSideB, long nSideC )
 			( nSideC == nSideB ) 
 	)
 	{
-		// all sides are identical no further check for valid Triangle
+		// All sides are identical no further check for valid Triangle
 		return( ecTriangleTypeEquilateral );
 	}
 
-	// Perform evaluation for Isosceles
-	if( 
-			nSideA == nSideB ||
-			nSideA == nSideC ||
-			nSideB == nSideC 
-	)
-	{
-		// two of the sides are identical no further check for valid Triangle
-		return( ecTriangleTypeIsosceles );
-	}
-	
-	// otherwise the sides must be all different and the Triangle is Scalene
-	// in order for any Triangle to be valid one side must always be shorter than the lenth of two others combined
-
+	// In order for any Triangle to be valid one side must always be shorter than the lenth of two others combined
 	if( 
 			!
 			(
@@ -71,14 +58,25 @@ enTriangleType fnGetTriangleType( long nSideA, long nSideB, long nSideC )
 			)
 	)
 	{
-		// the Scalene Triangle is impossible 
+		// The Triangle is impossible 
 		return( ecTriangleTypeERROR_Impossible );
 	}
 
-	// the Scalene Triangle is possible 
+	// Perform evaluation for Isosceles
+	if( 
+			nSideA == nSideB ||
+			nSideA == nSideC ||
+			nSideB == nSideC 
+	)
+	{
+		// Two of the sides are identical
+		return( ecTriangleTypeIsosceles );
+	}
+	
+	// Otherwise the sides must be all different and the Triangle is Scalene	
 	return( ecTriangleTypeScalene );
 }
-
+										  
 void fnAutomaticTestTriangles( long nStartLength, long nEndlength )
 {
 	long nSideA, nSideB, nSideC;
